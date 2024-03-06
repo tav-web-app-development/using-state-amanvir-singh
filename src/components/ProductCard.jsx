@@ -2,11 +2,13 @@ import { useState } from "react";
 export default function ProductCard({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showDescription, setShowDescription] = useState(false);
-  const [itemsInCart, setItemsInCart] = useState(1);
+  const [itemsInCart, setItemsInCart] = useState(0);
 
   const handleAddToCartClick = () => {
-    setItemsInCart((itemsInCart)=> itemsInCart+1);
-    alert(`You have ${itemsInCart} products added to your cart`);
+    setItemsInCart((itemsInCart)=> {
+      alert(`You have ${itemsInCart+1} products added to your cart`);
+      return (itemsInCart+1)});
+
   };
 
   return (
@@ -22,7 +24,7 @@ export default function ProductCard({ product }) {
 
       <h3>{product.name}</h3>
       {showDescription && <p>{product.description}</p>}
-      <button onClick={()=>{setShowDescription((showDescription)=> !showDescription)}}>{showDescription ? "Hide Description" : "Show Description"}</button>
+      <button onClick={()=>{setShowDescription((showDescription) => !showDescription)}}>{showDescription ? "Hide Description" : "Show Description"}</button>
       <div className="price">${product.price}</div>
 
       <button onClick={handleAddToCartClick}>Add to Cart</button>
